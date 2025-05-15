@@ -47,3 +47,5 @@ resource "aws_instance" "test_instance" {
 }
 
 ```
+
+This is a very minimal script. There is so much more Terraform can do. In cluding provisioning RDS, S3, VPCs, EFSs etc.
