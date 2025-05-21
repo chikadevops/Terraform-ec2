@@ -1,20 +1,19 @@
 provider "aws" {
-  region = "us-east-1"
+  region = var.region
 }
 
 resource "aws_key_pair" "test_key" {
   key_name   = "test_key"
-  public_key = file("/home/haelz/MyEC2Key.pub")
+  public_key = var.public_key
 }
 
 resource "aws_instance" "test_instance" {
-  ami           = "ami-084568db4383264d4"
-  instance_type = "t2.micro"
+  ami           = var.ami_value
+  instance_type = var.instance_type
   key_name      = aws_key_pair.test_key.key_name
 
-  vpc_security_group_ids = ["sg-06e52eddcf9ece437"]
-
-  user_data = <<-EOF
+  vpc_security_group_ids = var.vpc_security_group_ids
+  user_data              = <<-EOF
                 #!/bin/bash
                 apt update -y
                 apt install -y apache2
